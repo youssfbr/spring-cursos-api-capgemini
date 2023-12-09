@@ -12,7 +12,7 @@ import java.math.BigDecimal;
 @AllArgsConstructor
 @Table(name = "tb_curso")
 @EqualsAndHashCode(of = "id")
-public class Curso {
+public class Course {
 
     @Id
     @Column(name = "idCurso")
