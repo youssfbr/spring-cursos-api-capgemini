@@ -11,4 +11,5 @@ public interface ICourseService {
     CourseResponseDTO findCourse(Long id);
     CourseResponseDTO createCourse(CourseCreateRequestDTO courseCreateRequestDTO);
     CourseResponseDTO updateCourse(CourseUpdateRequestDTO courseUpdateRequestDTO);
+    void delete(Long id);
 }

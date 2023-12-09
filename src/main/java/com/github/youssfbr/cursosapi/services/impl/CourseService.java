@@ -61,6 +61,14 @@ public class CourseService implements ICourseService {
         return new CourseResponseDTO(courseUpdated);
     }
 
+    @Override
+    @Transactional
+    public void delete(Long id) {
+        checkExistsCourse(id);
+        courseRepository.deleteById(id);
+
+    }
+
     private Course checkExistsCourse(Long id) {
         return courseRepository.findById(id).
                 orElseThrow(() -> new ResourceNotFoundException(NOT_FOUND_MESSAGE + id));

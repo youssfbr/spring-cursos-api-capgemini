@@ -7,6 +7,7 @@ import com.github.youssfbr.cursosapi.services.ICourseService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -52,5 +53,12 @@ public class CourseController {
     @Operation(summary = "Atualizar", description = "Atualiza um usuário")
     public ResponseEntity<CourseResponseDTO> courseUpdate(@RequestBody CourseUpdateRequestDTO courseUpdateRequestDTO) {
         return ResponseEntity.ok(courseService.updateCourse(courseUpdateRequestDTO));
+    }
+
+    @DeleteMapping
+    @Operation(summary = "Excluir", description = "Exclui um usuário")
+    public ResponseEntity<Void> delete(@RequestBody CourseUpdateRequestDTO userUpdateRequestDTO) {
+        courseService.delete(userUpdateRequestDTO.id());
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 }
