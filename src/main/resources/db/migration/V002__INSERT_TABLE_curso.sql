@@ -1,0 +1,1 @@
+INSERT INTO TB_CURSO (nome_curso, valor_curso) VALUES ('Angular', 800.00);
