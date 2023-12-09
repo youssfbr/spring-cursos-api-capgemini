@@ -2,11 +2,13 @@ package com.github.youssfbr.cursosapi.services.impl;
 
 import com.github.youssfbr.cursosapi.dtos.CourseCreateRequestDTO;
 import com.github.youssfbr.cursosapi.dtos.CourseResponseDTO;
+import com.github.youssfbr.cursosapi.dtos.CourseUpdateRequestDTO;
 import com.github.youssfbr.cursosapi.entities.Course;
 import com.github.youssfbr.cursosapi.repositories.ICourseRepository;
 import com.github.youssfbr.cursosapi.services.ICourseService;
 import com.github.youssfbr.cursosapi.services.exceptions.ResourceNotFoundException;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -46,4 +48,22 @@ public class CourseService implements ICourseService {
 
         return new CourseResponseDTO(courseSaved);
     }
+
+    @Override
+    @Transactional
+    public CourseResponseDTO updateCourse(CourseUpdateRequestDTO courseUpdateRequestDTO) {
+
+        final Course courseToUpdate = checkExistsCourse(courseUpdateRequestDTO.id());
+        BeanUtils.copyProperties(courseUpdateRequestDTO, courseToUpdate);
+
+        final Course courseUpdated = courseRepository.save(courseToUpdate);
+
+        return new CourseResponseDTO(courseUpdated);
+    }
+
+    private Course checkExistsCourse(Long id) {
+        return courseRepository.findById(id).
+                orElseThrow(() -> new ResourceNotFoundException(NOT_FOUND_MESSAGE + id));
+    }
+
 }

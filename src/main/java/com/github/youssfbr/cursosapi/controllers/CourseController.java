@@ -2,6 +2,7 @@ package com.github.youssfbr.cursosapi.controllers;
 
 import com.github.youssfbr.cursosapi.dtos.CourseCreateRequestDTO;
 import com.github.youssfbr.cursosapi.dtos.CourseResponseDTO;
+import com.github.youssfbr.cursosapi.dtos.CourseUpdateRequestDTO;
 import com.github.youssfbr.cursosapi.services.ICourseService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -45,5 +46,11 @@ public class CourseController {
                 .toUri();
 
         return ResponseEntity.created(location).body(courseCreated);
+    }
+
+    @PutMapping
+    @Operation(summary = "Atualizar", description = "Atualiza um usuário")
+    public ResponseEntity<CourseResponseDTO> courseUpdate(@RequestBody CourseUpdateRequestDTO courseUpdateRequestDTO) {
+        return ResponseEntity.ok(courseService.updateCourse(courseUpdateRequestDTO));
     }
 }

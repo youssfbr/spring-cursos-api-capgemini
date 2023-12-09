@@ -9,7 +9,8 @@ import java.util.List;
 public interface ICourseRepository extends JpaRepository<Course, Long> {
     @Query(nativeQuery = true, value = """
             SELECT c.id_curso, c.nome_curso, c.valor_curso
-            FROM tb_curso c;
+            FROM tb_curso c
+            ORDER BY c.id_curso ASC;
             """)
     List<Course> findAllCourses();
 }
