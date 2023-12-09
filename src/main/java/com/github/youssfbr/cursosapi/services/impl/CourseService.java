@@ -1,6 +1,8 @@
 package com.github.youssfbr.cursosapi.services.impl;
 
+import com.github.youssfbr.cursosapi.dtos.CourseCreateRequestDTO;
 import com.github.youssfbr.cursosapi.dtos.CourseResponseDTO;
+import com.github.youssfbr.cursosapi.entities.Course;
 import com.github.youssfbr.cursosapi.repositories.ICourseRepository;
 import com.github.youssfbr.cursosapi.services.ICourseService;
 import lombok.RequiredArgsConstructor;
@@ -22,5 +24,16 @@ public class CourseService implements ICourseService {
                 .stream()
                 .map(CourseResponseDTO::new)
                 .toList();
+    }
+
+    @Override
+    @Transactional
+    public CourseResponseDTO createCourse(CourseCreateRequestDTO courseCreateRequestDTO) {
+
+        final Course courseToSave = new Course(courseCreateRequestDTO);
+
+        final Course courseSaved = courseRepository.save(courseToSave);
+
+        return new CourseResponseDTO(courseSaved);
     }
 }

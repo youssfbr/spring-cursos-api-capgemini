@@ -1,5 +1,6 @@
 package com.github.youssfbr.cursosapi.entities;
 
+import com.github.youssfbr.cursosapi.dtos.CourseCreateRequestDTO;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -24,4 +25,9 @@ public class Course {
 
     @Column(name = "valorCurso", precision = 12, scale = 2)
     private BigDecimal price;
+
+    public Course(CourseCreateRequestDTO courseCreateRequestDTO) {
+        this.name = courseCreateRequestDTO.name();
+        this.price = new BigDecimal(courseCreateRequestDTO.price());
+    }
 }
