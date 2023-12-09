@@ -7,5 +7,6 @@ import java.util.List;
 
 public interface ICourseService {
     List<CourseResponseDTO> findAllCourses();
+    CourseResponseDTO findCourse(Long id);
     CourseResponseDTO createCourse(CourseCreateRequestDTO courseCreateRequestDTO);
 }

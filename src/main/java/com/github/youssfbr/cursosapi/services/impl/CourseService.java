@@ -5,6 +5,7 @@ import com.github.youssfbr.cursosapi.dtos.CourseResponseDTO;
 import com.github.youssfbr.cursosapi.entities.Course;
 import com.github.youssfbr.cursosapi.repositories.ICourseRepository;
 import com.github.youssfbr.cursosapi.services.ICourseService;
+import com.github.youssfbr.cursosapi.services.exceptions.ResourceNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -16,6 +17,7 @@ import java.util.List;
 public class CourseService implements ICourseService {
 
     private final ICourseRepository courseRepository;
+    private static final String NOT_FOUND_MESSAGE = "Resource not found with id ";
 
     @Override
     @Transactional(readOnly = true)
@@ -24,6 +26,14 @@ public class CourseService implements ICourseService {
                 .stream()
                 .map(CourseResponseDTO::new)
                 .toList();
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public CourseResponseDTO findCourse(Long id) {
+        return courseRepository.findById(id)
+                .map(CourseResponseDTO::new)
+                .orElseThrow(() -> new ResourceNotFoundException(NOT_FOUND_MESSAGE + id));
     }
 
     @Override
