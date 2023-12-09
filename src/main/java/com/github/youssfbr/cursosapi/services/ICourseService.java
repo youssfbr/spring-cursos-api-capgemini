@@ -1,9 +1,9 @@
 package com.github.youssfbr.cursosapi.services;
 
-import com.github.youssfbr.cursosapi.entities.Course;
+import com.github.youssfbr.cursosapi.dtos.CourseResponseDTO;
 
 import java.util.List;
 
 public interface ICourseService {
-    List<Course> findAllCourses();
+    List<CourseResponseDTO> findAllCourses();
 }

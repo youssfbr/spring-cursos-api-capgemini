@@ -1,6 +1,6 @@
 package com.github.youssfbr.cursosapi.controllers;
 
-import com.github.youssfbr.cursosapi.entities.Course;
+import com.github.youssfbr.cursosapi.dtos.CourseResponseDTO;
 import com.github.youssfbr.cursosapi.services.ICourseService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -18,8 +18,7 @@ public class CourseController {
     private final ICourseService courseService;
 
     @GetMapping
-    public ResponseEntity<List<Course>> findAllCourses() {
+    public ResponseEntity<List<CourseResponseDTO>> findAllCourses() {
         return ResponseEntity.ok(courseService.findAllCourses());
     }
-
 }

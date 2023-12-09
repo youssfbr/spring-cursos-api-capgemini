@@ -1,6 +1,6 @@
 package com.github.youssfbr.cursosapi.services.impl;
 
-import com.github.youssfbr.cursosapi.entities.Course;
+import com.github.youssfbr.cursosapi.dtos.CourseResponseDTO;
 import com.github.youssfbr.cursosapi.repositories.ICourseRepository;
 import com.github.youssfbr.cursosapi.services.ICourseService;
 import lombok.RequiredArgsConstructor;
@@ -17,7 +17,10 @@ public class CourseService implements ICourseService {
 
     @Override
     @Transactional(readOnly = true)
-    public List<Course> findAllCourses() {
-        return courseRepository.findAllCourses();
+    public List<CourseResponseDTO> findAllCourses() {
+        return courseRepository.findAllCourses()
+                .stream()
+                .map(CourseResponseDTO::new)
+                .toList();
     }
 }
